@@ -11,10 +11,25 @@
       <% for tag in @project.tag_list %>
         <%= link_to tag.to_s, tag_projects_path(tag) %>
       <% end %>   
+    </div>
+  <div class="text">
+    <p><b><%= I18n.t('tog_social.projects.model.aims') %></b><br />
+      <%= (h @project.extrainfo.aims).split("\n").join("<br />") %></p>
   </div>
   <div class="text">
-    <p><%= @project.description %></p>
+    <p><b><%= I18n.t('tog_social.projects.model.description') %></b><br />
+    <%= (h @project.description).split("\n").join("<br />") %></p>
   </div>
+  <div class="text">
+    <p><b><%= I18n.t('tog_social.projects.model.timeline') %></b><br />
+      <%= (h @project.extrainfo.timeline).split("\n").join("<br />") %></p>
+  </div>
+  <div class="text">
+    <p><b><%= I18n.t('tog_social.projects.model.location') %>:</b> 
+      <%= (h @project.extrainfo.location) %></p>
+  </div>
+ 
+
 </div> <!-- /.detail1 --> 
 
 <% content_for :sidebar do %>

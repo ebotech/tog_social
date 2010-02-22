@@ -6,6 +6,7 @@ en:
     member:
       my_groups: My Groups
       my_projects: My Projects
+      profiles: Profiles
       my_sharings: Things I've' shared
     site:
       profiles: People
@@ -202,13 +203,16 @@ en:
         private_help: A private project won´t appear in listings.
         moderated: Moderated
         moderated_help: In a moderated project each join request should be approved by one of project's moderators.
-        moderated_by: Moderated by
-        moderated_by_you: Projects moderated by you
+        moderated_by: Lead by
+        moderated_by_you: Projects you are leading
         active: Active
         icon: Icon
         created_at: Created at
         updated_at: Update at
         member_status: Status
+        aims: Aims
+        timeline: Timeline
+        location: Location
       site:
         share: Share with your projects
         share_title: Share with project '{{name}}'

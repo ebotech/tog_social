@@ -1,6 +1,7 @@
 <div class="titleB"><%= I18n.t('tog_social.projects.member.edit_project', :project => @project.name) %></div>
 <br/>
 <%= error_messages_for :project %>
+<% @extrainfo = (@project && @project.extrainfo) ? @project.extrainfo : Joinablesub.new %>   
 
 <% form_for(@project, :url => member_project_path(@project), :html => { :multipart => true, :method => :put}) do |f| %>
   <fieldset>
@@ -10,8 +11,20 @@
         <%= f.text_field  :name, :class => 'fieldbox wide' %>
       </p>
       <p>
+        <label for="joinablesub_aims"><%= I18n.t('tog_social.projects.model.aims') %></label>
+        <%= text_area_tag "joinablesub[aims]", @extrainfo.aims, :class => 'fieldbox wide', :size => '60x4' %></dd>
+      </p>
+      <p>
         <label for="project_description"><%= I18n.t('tog_social.projects.model.description') %></label>
         <%= f.text_area  :description, :class => 'fieldbox wide', :size => '60x10' %></dd>
+      </p>
+      <p>
+        <label for="joinablesub_timeline"><%= I18n.t('tog_social.projects.model.timeline') %></label>
+        <%= text_area_tag  "joinablesub[timeline]", @extrainfo.timeline, :class => 'fieldbox wide', :size => '60x4' %></dd>
+      </p>
+      <p>
+        <label for="joinablesub_location"><%= I18n.t('tog_social.projects.model.location') %></label>
+        <%= text_field_tag "joinablesub[location]", @extrainfo.location, :class => 'fieldbox wide' %>
       </p>
       <p>
         <label for="project_tag_list"><%= I18n.t('tog_social.tags.tags') %></label>

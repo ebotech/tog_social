@@ -11,6 +11,9 @@ class Member::ProjectsController < Member::BaseController
   def create
     @project = Project.new(params[:project])
     @project.author = current_user
+    @extrainfo = Joinablesub.new(params[:joinablesub])
+    @extrainfo.save
+    @project.extrainfo = @extrainfo
     @project.save
 
 
@@ -48,6 +51,9 @@ class Member::ProjectsController < Member::BaseController
   end
 
   def update
+    @project.extrainfo = Joinablesub.new unless @project.extrainfo
+    @project.extrainfo.update_attributes!(params[:joinablesub])
+    @project.extrainfo.save
     @project.update_attributes!(params[:project])
     @project.tag_list = params[:project][:tag_list]
     @project.save
