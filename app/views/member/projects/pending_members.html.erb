@@ -1,0 +1,33 @@
+<div class="detail detail1">
+  
+    <div class="image"><%=link_to image_for_project(@project, 'medium', :class=>"img"), project_path(@project)%></div>
+    <div class="title"><%= link_to @project.name, project_path(@project) %></div>
+    <div class="subtitle"><%= I18n.t('tog_social.projects.model.created_at') %> <%=h @project.created_at.strftime("%d/%m/%Y") %>, <%=@project.members.size%> members</div>
+    <div class="summary"><%= I18n.t('tog_social.projects.model.moderated_by') %>:
+        <% for moderator in @project.moderators %>
+            <%=link_to moderator.profile.full_name, profile_path(moderator.profile), :class=> 'maincolor4'%>
+        <% end %>
+        <br/>
+        <%= I18n.t('tog_social.tags.tags') %>: 
+        <% for tag in @project.tag_list %>
+          <%= link_to tag.to_s, tag_projects_path(tag) %>
+        <% end %>   
+    </div>
+    
+    <div class="portlet portletC" id="portlet_moreLinks">
+        <h2><span><%= I18n.t('tog_social.projects.member.pending_members') %></span></h2>
+        <div class="portlet_content">
+            <ul>
+                <% @project.pending_members.each do |user| %>
+                  <li>
+                    <%= link_to user.profile.full_name, profile_path(user.profile) -%> 
+                    [<%= link_to I18n.t('tog_social.projects.member.accept'), member_project_accept_member_path(@project, user), {:class => "add", :title => I18n.t('tog_social.projects.member.accept_title')} -%>]               
+                                 --
+                    [<%= link_to I18n.t('tog_social.projects.member.reject'), member_project_reject_member_path(@project, user), {:class => "delete", :title => I18n.t('tog_social.projects.member.reject_title')} -%>]
+                  </li>
+                  <% end %>
+            </ul>
+        </div> 
+    </div>    
+    
+</div> <!-- /.detail1 -->

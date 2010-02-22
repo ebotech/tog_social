@@ -1,0 +1,46 @@
+<div class="titleB"><%= I18n.t('tog_social.projects.site.create_project') %></div>
+<br />
+
+<% if @project && !@project.errors.empty? -%>
+<div class="error">
+  <%= error_messages_for :project %>
+</div>
+<% end -%>
+
+<% form_for(:project, :url=>member_projects_path, :html=>{:multipart=>true}) do |f| %>
+  <fieldset>
+    <legend><%= I18n.t('tog_social.projects.site.details') %></legend>
+    <div class="fields">
+      <p>
+        <label for="project_name"><%= I18n.t('tog_social.projects.model.name') %></label>
+        <%= f.text_field  :name, :class => 'fieldbox wide', :size => 35 %>
+      </p>
+      <p>
+        <label for="project_description"><%= I18n.t('tog_social.projects.model.description') %></label>
+        <%= f.text_area  :description, :class => 'fieldbox wide', :size => '60x10' %></dd>
+      </p>
+      <p>
+        <label for="project_tag_list"><%= I18n.t('tog_social.tags.tags') %></label>
+        <%= f.text_field  :tag_list, :class => 'fieldbox', :size => 35 %><br/>
+        <span class="helpinfo"><%= I18n.t('tog_social.tags.separated_by_comma') %></span>
+      </p>
+      <p>
+        <label for="project_image"><%= I18n.t('tog_social.projects.model.image') %></label>
+        <%= image_for_project(@project, 'medium') %><br/>
+        <%= file_field "project", "image" %><br/>
+        <span class="helpinfo"><%= I18n.t('tog_social.projects.model.image_help') %></span>
+      </p>
+      <p>
+        <label for="project_private" class="nolabel"><%= f.check_box :private %> <%= I18n.t('tog_social.projects.model.private') %></label><br/>
+        <span class="helpinfo"><%= I18n.t('tog_social.projects.model.private_help') %></span>
+      </p>
+      <p>
+        <label for="project_moderated" class="nolabel"><%= f.check_box :moderated %> <%= I18n.t('tog_social.projects.model.moderated') %></label><br/>
+        <span class="helpinfo"><%= I18n.t('tog_social.projects.model.moderated_help') %></span>
+      </p>
+    </div>
+    <div class="actions">
+      <%= submit_tag I18n.t('tog_social.projects.site.create'), :class => "button mainaction" %>
+    </div>
+  </fieldset>
+<% end %>

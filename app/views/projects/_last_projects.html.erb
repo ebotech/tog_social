@@ -1,0 +1,19 @@
+<div class="portlet portletJ" id="portlet_last_projects">
+    <h2><span><%= I18n.t('tog_social.projects.site.last_projects') %></span></h2>
+    <div class="portlet_content">
+        <ul>
+            <% last_projects(3).each do |project| -%>
+              <li class="clearfix">
+                  <div class="image"><%=link_to image_for_project(project, 'medium'), project_path(project)%></div>
+                  <div class="title"><%= project.name -%></div>
+                  <div class="text">
+                      <%= I18n.t('tog_social.projects.model.created_at') %> <%=I18n.l(project.created_at, :format => :short)%>
+                      <br/>
+                      <%= I18n.t('tog_social.projects.model.members', :count => project.members.size) %>
+                  </div>
+                  <div class="more"><%= link_to I18n.t('tog_social.more_info'), project_path(project) -%></div>
+              </li>            
+            <% end -%>            
+        </ul> 
+    </div>    
+</div> <!-- /.portlet_pluginsTog -->

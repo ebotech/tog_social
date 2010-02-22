@@ -1,7 +1,8 @@
 class Membership < ActiveRecord::Base
 
-  belongs_to :group, :foreign_key => :joinable_id
   belongs_to :user
+  belongs_to :group, :foreign_key => :joinable_id
+  belongs_to :project, :foreign_key => :joinable_id
   
   record_activity_of :user
   

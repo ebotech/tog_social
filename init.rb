@@ -45,13 +45,13 @@ Tog::Plugins.helpers ProfilesHelper, GroupsHelper, ProjectsHelper, SharingsHelpe
 
 #Tog::Interface.sections(:site).add "Groups", "/groups"
 #Tog::Interface.sections(:site).add "Profiles", "/profiles"
-Tog::Interface.sections(:site).add "My Projects", "/member/projects"
+Tog::Interface.sections(:site).add "Projects", "/projects"
 #Tog::Interface.sections(:member).add "My sharings", "/member/sharings"
 #Tog::Interface.sections(:member).add "My groups", "/member/groups"  
 Tog::Interface.sections(:member).add "Profiles", "/profiles"
 Tog::Interface.sections(:member).add "My Projects", "/member/projects"
 Tog::Interface.sections(:admin).add "Groups", "/admin/groups"
-Tog::Interface.sections(:admin).add "Groups", "/admin/projects"
+Tog::Interface.sections(:admin).add "Projects", "/admin/projects"
 
 Tog::Search.sources << "Profile"     
 Tog::Search.sources << "Group"

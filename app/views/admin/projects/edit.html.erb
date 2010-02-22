@@ -1,0 +1,44 @@
+<h1><%= link_to I18n.t("tog_social.projects.admin.projects"), admin_projects_path%> / <%=  @project.name -%></h1>
+
+<p>
+  <% unless @project.active? %>
+    <span id="deactivated_status">
+    <%= link_to_remote I18n.t("tog_social.projects.admin.activate"),  :url => activate_admin_project_url(@project), :update => "deactivated_status", :html => {:class => 'button'} %>
+    </span>
+  <% end %>
+  <% form_tag admin_project_path(@project), :method => :delete do -%>
+    <%= submit_tag I18n.t("tog_social.projects.admin.delete_project"), :disable_with => I18n.t("tog_social.projects.admin.please_wait"), :class =>"button delete" %>
+  <% end -%>
+</p>
+
+<br/>
+
+
+<table class="tableE">
+  <caption><%= I18n.t("tog_social.projects.admin.project_details") %></caption>
+  <tbody>
+  <tr><th scope="row"><%= I18n.t("tog_social.projects.model.name") %></th><td><%=@project.name%></td></tr>
+  <tr><th scope="row"><%= I18n.t("tog_social.projects.model.icon") %></th><td><%= image_for_project(@project, 'medium') if @project.image %></td></tr>
+  <tr><th scope="row"><%= I18n.t("tog_social.projects.model.created_by") %></th><td><%= link_to @project.author.profile.full_name, edit_admin_user_path(@project.author) if @project.author %></td></tr>
+  <tr><th scope="row"><%= I18n.t("tog_social.projects.model.created_at") %></th><td><%=@project.creation_date%></td></tr>
+  </tbody>
+</table>
+
+<table class="tableE">
+  <caption><%= I18n.t("tog_social.projects.admin.memberships") %></caption>
+  <tbody>
+  <tr><th scope="row"><%= I18n.t("tog_social.projects.admin.moderators") %></th>
+      <td>
+        <%= @project.moderators.size %>
+        <br/>
+        <% for member in @project.moderators %>
+        <li><%= link_to member.profile.full_name, edit_admin_user_path(member) %> (<%= member.email %>)</li>
+        <% end %>
+      </td>
+  </tr>
+  <tr><th scope="row"><%= I18n.t("tog_social.projects.admin.members") %></th><td><%=@project.members.size%></td></tr>
+  <tr><th scope="row"><%= I18n.t("tog_social.projects.admin.pending_members") %></th><td><%=@project.pending_members.size%></td></tr>
+  </tbody>
+</table>
+
+<br />
