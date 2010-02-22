@@ -1,4 +1,5 @@
 class AddAttachmentsImageToGroup < ActiveRecord::Migration
+  Group.table_name = :groups
   def self.up
     add_column :groups, :image_file_name, :string
     add_column :groups, :image_content_type, :string

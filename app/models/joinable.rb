@@ -21,7 +21,8 @@ class Joinable < ActiveRecord::Base
 
   has_many :invited_members,  :through => :memberships, :source => :user, :conditions => ['memberships.state = ?', 'invited']
   named_scope :can_invite, :include => :memberships, 
-                           :conditions => ["memberships.state='active' and groups.state='active' and(memberships.moderator = ? or groups.moderated = ?)", true, false]  
+                           :conditions => ["memberships.state='active' and joinables.state='active' and(memberships.moderator = ? or joinables.moderated = ?)", true, false]  
+#                           :conditions => ["memberships.state='active' and groups.state='active' and(memberships.moderator = ? or groups.moderated = ?)", true, false]  
   
   validates_uniqueness_of :name
   validates_presence_of :name
@@ -57,7 +58,7 @@ class Joinable < ActiveRecord::Base
   named_scope :active, :conditions => {:state => 'active'}
   
   def self.site_search(query, search_options={})
-    Group.active.find(:all, :conditions => ["name like ?", "%#{query}%"])
+    self.active.find(:all, :conditions => ["name like ?", "%#{query}%"])
   end
 
   def membership_of(user)
@@ -151,8 +152,8 @@ class Joinable < ActiveRecord::Base
   def set_default_image
     unless self.image?
       if Tog::Config["plugins.tog_social.group.image.default"]
-        default_group_image = File.join(RAILS_ROOT, 'public', 'tog_social', 'images', Tog::Config["plugins.tog_social.group.image.default"])
-        self.image = File.new(default_group_image)
+        default_image = File.join(RAILS_ROOT, 'public', 'tog_social', 'images', Tog::Config["plugins.tog_social.group.image.default"])
+        self.image = File.new(default_image)
       end
     end
   end

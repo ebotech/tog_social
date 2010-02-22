@@ -1,6 +1,6 @@
 class Membership < ActiveRecord::Base
 
-  belongs_to :group
+  belongs_to :group, :foreign_key => :joinable_id
   belongs_to :user
   
   record_activity_of :user

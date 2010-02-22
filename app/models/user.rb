@@ -11,10 +11,12 @@ class User < ActiveRecord::Base
                                    :conditions => ['memberships.moderator = ?', true]
 
   has_many :groups, :through => :memberships,
-                    :conditions => "memberships.state='active' and groups.state='active'"
+                    :conditions => "memberships.state='active' and joinables.state='active'"
+#                    :conditions => "memberships.state='active' and groups.state='active'"
 
   has_many :moderated_groups, :through => :moderator_memberships,
-                    :conditions => "memberships.state='active' and groups.state='active'", :source => :group
+                    :conditions => "memberships.state='active' and joinables.state='active'", :source => :joinable
+#                    :conditions => "memberships.state='active' and groups.state='active'", :source => :group
 
   has_many :sharings, :class_name => 'Share', :dependent => :destroy
   
