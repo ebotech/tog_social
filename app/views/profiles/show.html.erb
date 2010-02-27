@@ -26,8 +26,8 @@
                 <li><%= link_to I18n.t('tog_social.profiles.site.edit_profile'), edit_member_profile_path(@profile) %></li>
               <% else -%>
                 <li><%= link_to I18n.t('tog_social.profiles.site.send_message'), member_new_message_to_path(@profile.user) %></li>
-                <li><%= report_abuse_link @profile %></li>
-                <li><%= following_options(@profile) %></li>
+                <li><%- report_abuse_link @profile %></li>
+                <li><%- following_options(@profile) %></li>
               <% end -%>
             </ul>
         </div> 
@@ -37,19 +37,19 @@
 
 <% content_for :sidebar do %>
 
-<%= render :partial => "shared/profiles_portlet", :locals => { 
+<%- render :partial => "shared/profiles_portlet", :locals => { 
   :items =>  @profile.friends, 
   :style => :portletG, 
   :title => I18n.t('tog_social.profiles.model.friends'), 
   :no_items => I18n.t('tog_social.profiles.model.friends_not_found', :profile_full_name => @profile.full_name)} %>
 
-<%= render :partial => "shared/profiles_portlet", :locals => { 
+<%- render :partial => "shared/profiles_portlet", :locals => { 
   :items =>  @profile.followers, 
   :style => :portletG, 
   :title => I18n.t('tog_social.profiles.model.followers'), 
   :no_items => I18n.t('tog_social.profiles.model.followers_not_found', :profile_full_name => @profile.full_name) } %>
 
-<%= render :partial => "shared/profiles_portlet", :locals => { 
+<%- render :partial => "shared/profiles_portlet", :locals => { 
   :items =>  @profile.followings, 
   :style => :portletG, 
   :title => I18n.t('tog_social.profiles.model.followings'), 
